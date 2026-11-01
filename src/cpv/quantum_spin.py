@@ -214,7 +214,7 @@ def eigensystem(hamiltonian) -> tuple[np.ndarray, np.ndarray]:
     """Ascending eigenvalues and the corresponding eigenvectors as columns.
 
     Uses ``eigh``, which is only valid for a Hermitian matrix, so hermiticity
-    is checked rather than assumed -- a non-Hermitian input would otherwise be
+    is checked rather than assumed: a non-Hermitian input would otherwise be
     silently symmetrised by the LAPACK driver.
     """
     h_matrix = np.asarray(hamiltonian, dtype=complex)
@@ -237,7 +237,7 @@ def expectation(operator, state) -> float | complex:
     r""":math:`\langle \psi | A | \psi \rangle` for a normalised ``state``.
 
     A real value is returned when the imaginary part is at round-off, which is
-    the case for any Hermitian operator -- so a complex result is a signal that
+    the case for any Hermitian operator, so a complex result is a signal that
     the operator was not Hermitian.
     """
     psi = np.asarray(state, dtype=complex).ravel()

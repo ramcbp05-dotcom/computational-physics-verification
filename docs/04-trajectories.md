@@ -1,6 +1,6 @@
 # 4. Trajectories: charged particles and the two-body problem
 
-Two classical problems grouped because they are verified the same way — by
+Two classical problems grouped because they are verified the same way: by
 conserved quantities and closed forms, and by measuring the convergence order
 rather than looking at the orbit.
 
@@ -33,8 +33,8 @@ orbit its starting point. The centre is
 R = r + m (v × B) / (q B²)
 ```
 
-one gyroradius away, on the side the Lorentz force points — which flips with
-the sign of the charge. Starting at `[r_c, 0, 0]` with `v` along `+y` puts the
+one gyroradius away, on the side the Lorentz force points: which flips with the
+sign of the charge. Starting at `[r_c, 0, 0]` with `v` along `+y` puts the
 centre at `[2r_c, 0, 0]` for `q > 0` and at the origin for `q < 0`. Measuring
 the orbit radius about the origin instead gives a spread of `2r_c`, which is
 how a first version of this check appeared to fail; the function exists so the
@@ -77,8 +77,8 @@ That is the property that makes the scheme standard in particle-in-cell work.
 
 **Where the position goes matters as much as the rotation.** The first version
 of this module advanced the position as `x += Δt·v_new`, after the velocity
-update — an asymmetric arrangement. The symmetric one puts a half drift on
-each side: drift, kick-rotate-kick, drift.
+update: an asymmetric arrangement. The symmetric one puts a half drift on each
+side: drift, kick-rotate-kick, drift.
 
 | arrangement | energy drift (E and B) | gyro-orbit radius spread |
 |---|---|---|
@@ -109,7 +109,7 @@ Conserved: the specific energy and the specific angular momentum,
 ```
 
 `L` is conserved because the force is central (`r × r = 0`), and its
-conservation confines the motion to the initial plane — measured deviation out
+conservation confines the motion to the initial plane: measured deviation out
 of plane: `< 1e-15`.
 
 ### Orbital elements
@@ -124,9 +124,8 @@ T = 2π √(a³/μ)                       (Kepler's third law)
 ```
 
 At periapsis, vis-viva gives `v_p = √( (μ/a)(1+e)/(1−e) )` perpendicular to
-`r`. Round-tripping `(a, e) → state → (a, e)` over
-`(1, 0), (1, 0.3), (2.5, 0.6), (0.4, 0.85)`: errors at or below `7.2e-16` in
-`a`, `e`, `T` and `L`.
+`r`. Round-tripping `(a, e) → state → (a, e)` over `(1, 0), (1, 0.3), (2.5,
+0.6), (0.4, 0.85)`: errors at or below `7.2e-16` in `a`, `e`, `T` and `L`.
 
 Unbound states are reported honestly: `ε ≥ 0` gives `bound=False` with infinite
 apoapsis and period, rather than a silently wrapped number. At exactly the
@@ -147,7 +146,7 @@ RK4 is fourth-order and is neither. The difference is not about accuracy:
 RK4 is five orders of magnitude more accurate at five orbits and its error
 **grows linearly with time**. Leapfrog's is flat to four significant figures
 from 5 orbits to 320: a symplectic map has no secular energy drift, only a
-bounded `O(Δt²)` oscillation. Angular momentum splits the same way — leapfrog
+bounded `O(Δt²)` oscillation. Angular momentum splits the same way: leapfrog
 holds it at round-off, because each kick is parallel to `r` and each drift is
 parallel to `v`, so every sub-step preserves `x v_y − y v_x` exactly.
 
@@ -166,8 +165,8 @@ Fitted from the final-position error over one orbit at `e = 0.3`:
 | RK4 | 4 | 4.118 | 0.99979 |
 | Boris | 2 | 2.000 | 1.00000 |
 
-The error ratios between consecutive halvings are 4.00 for leapfrog and
-16.5–20.6 for RK4, which is the direct reading of orders 2 and 4.
+The error ratios between consecutive halvings are 4.00 for leapfrog and 16.5 to
+20.6 for RK4, which is the direct reading of orders 2 and 4.
 
 ## Figures
 
@@ -175,13 +174,13 @@ The error ratios between consecutive halvings are 4.00 for leapfrog and
 
 *Left:* a gyro-orbit against the analytic circle of radius `r_c`, with the
 guiding centre marked. *Centre:* the cycloid of a particle released from rest
-in crossed fields, with the `E × B` drift line. *Right:* a Kepler orbit at
-`e = 0.6` with `a(1∓e)` marked.
+in crossed fields, with the `E × B` drift line. *Right:* a Kepler orbit at `e =
+0.6` with `a(1∓e)` marked.
 
 ![verification](../figures/04-trajectories-verification.png)
 
-*Left:* relative energy error against time for both integrators over 60 orbits
-— leapfrog oscillates under a flat ceiling, RK4's envelope climbs. *Right:* the
+*Left:* relative energy error against time for both integrators over 60 orbits:
+leapfrog oscillates under a flat ceiling, RK4's envelope climbs. *Right:* the
 convergence study, with the promised slopes dotted.
 
 ## Limitations
@@ -190,6 +189,6 @@ convergence study, with the promised slopes dotted.
   self-consistent fields, no collisions.
 * Non-relativistic. The Boris push has a well-known relativistic form; it is
   not implemented here.
-* Two bodies only — no `N`-body, no softening, no adaptive stepping. The
-  `e = 0.85` case is already where a fixed step starts to be wasteful, and a
-  close encounter would need an adaptive or regularised scheme.
+* Two bodies only: no `N`-body, no softening, no adaptive stepping. The `e =
+  0.85` case is already where a fixed step starts to be wasteful, and a close
+  encounter would need an adaptive or regularised scheme.

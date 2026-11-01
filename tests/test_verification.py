@@ -90,7 +90,7 @@ class TestConvergenceOrder:
         steps = np.array([0.1, 0.05, 0.025, 0.0125])
         study = V.convergence_order(steps, 2.0 * steps ** 1.0, expected=2.0)
         assert not study.matches_expected(), (
-            "an order-1 sequence must not pass a check for order 2 -- this is the "
+            "an order-1 sequence must not pass a check for order 2. This is the "
             "exact failure a first-order integrator masquerading as second order "
             "would produce"
         )

@@ -112,7 +112,7 @@ class ConvergenceStudy:
         prev = None
         for step, err in zip(self.steps, self.errors):
             if prev is None:
-                lines.append(f"| {step:.4g} | {err:.4g} | — | — |")
+                lines.append(f"| {step:.4g} | {err:.4g} | n/a | n/a |")
             else:
                 ratio = prev[1] / err if err > 0 else float("inf")
                 implied = np.log(ratio) / np.log(prev[0] / step) if err > 0 else float("nan")

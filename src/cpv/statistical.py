@@ -247,7 +247,7 @@ def ising_spectrum(n_sites: int, *, coupling: float = 1.0, field: float = 0.0,
         if periodic:
             # The ring has exactly N bonds, i -> i+1 mod N. At N = 2 that means
             # sites 0 and 1 are bonded *twice*, which looks like double counting
-            # but is what `tr T**N` computes -- the transfer matrix has no way to
+            # but is what `tr T**N` computes: the transfer matrix has no way to
             # express a 2-site ring with one bond. Matching the convention here
             # is what makes the two methods agree at every N; see
             # docs/02-statistical-physics.md.

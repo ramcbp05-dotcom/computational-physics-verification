@@ -6,7 +6,7 @@ this is right?*
 
 There are only four kinds of answer, and they carry very different weight.
 
-## 1. Exact algebraic identities — verified at round-off
+## 1. Exact algebraic identities: verified at round-off
 
 Some statements hold exactly in exact arithmetic, so the only error is
 floating-point noise. These are the strongest checks available, and they are
@@ -29,20 +29,20 @@ exact identity throws away almost all of the check's power.
 Two of these deserve a note.
 
 **Why the commutators are exact rather than approximate.** The spin matrices
-are built from the ladder operators, with `Sx = (S+ + S-)/2` and
-`Sy = (S+ - S-)/2i`. Writing `Sx` and `Sy` out explicitly instead would make
-the SU(2) algebra a coincidence of the entries; building them this way makes it
+are built from the ladder operators, with `Sx = (S+ + S-)/2` and `Sy = (S+ -
+S-)/2i`. Writing `Sx` and `Sy` out explicitly instead would make the SU(2)
+algebra a coincidence of the entries; building them this way makes it
 structural, and the measurement then confirms only that the matrix products
 were computed correctly.
 
 **Why the HOM zero is worth more than a small number.** The two-photon
-coincidence amplitude is the permanent of the splitter matrix,
-`U00 U11 + U10 U01`. At 50:50 with the correct `pi/2` reflection phase this is
-`(1·1 + i·i)/2`, which is zero *algebraically*. A coincidence probability of
-`1e-4` would not be "close enough" — it would mean the phase convention is
-wrong. Exact zeros are the sharpest tests in a numerical suite.
+coincidence amplitude is the permanent of the splitter matrix, `U00 U11 + U10
+U01`. At 50:50 with the correct `pi/2` reflection phase this is `(1·1 +
+i·i)/2`, which is zero *algebraically*. A coincidence probability of `1e-4`
+would not be "close enough": it would mean the phase convention is wrong. Exact
+zeros are the sharpest tests in a numerical suite.
 
-## 2. Closed forms — verified at the accuracy of the method
+## 2. Closed forms: verified at the accuracy of the method
 
 Where an analytic solution exists it is compared term by term, not
 qualitatively:
@@ -62,7 +62,7 @@ Several of these come out at round-off because the "numerical" route is itself
 exact: unitary time evolution goes through the eigenbasis, not a time-stepping
 scheme, so there is no step-size error to report.
 
-## 3. Two independent methods — verified against each other
+## 3. Two independent methods: verified against each other
 
 The strongest form of evidence when no closed form covers the general case:
 compute the same quantity twice by routes that share no code.
@@ -80,7 +80,7 @@ but they are different models, and only an independent second method makes the
 difference visible. The library now documents the `N`-bond ring convention and
 `quantum_spin` **raises** rather than choosing silently.
 
-## 4. Convergence order — verified by measuring the exponent
+## 4. Convergence order: verified by measuring the exponent
 
 For anything discretised, the error must shrink at the rate the method
 promises. This is the check a plot cannot substitute for: an integrator can
@@ -101,12 +101,12 @@ Measuring rather than asserting found four real errors during development, all
 of them in work that looked correct:
 
 1. **A first-order Boris push.** The velocity update was textbook, and the
-   position was advanced as `x += dt * v_new` — an asymmetric arrangement.
+   position was advanced as `x += dt * v_new`: an asymmetric arrangement.
    Convergence order was still 2, so an order study alone would have passed it.
    The conserved quantities gave it away: energy drift `1.5e-04` and a
    gyro-orbit radius varying by `3.1e-03` of `r_c`. Moving to drift-kick-drift
-   gave `5.1e-14` and `3.1e-14` — ten orders of magnitude, from reordering
-   three lines.
+   gave `5.1e-14` and `3.1e-14`: ten orders of magnitude, from reordering three
+   lines.
 
 2. **A wrong symmetry claim.** A test asserted that a uniform field along `z`
    breaks `[H, S^2] = 0`. It does not: `S^2` commutes with every component of

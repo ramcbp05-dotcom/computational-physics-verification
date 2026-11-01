@@ -9,7 +9,7 @@ Every component is a 2x2 unitary, so:
   :math:`(\sin^2(\varphi/2), \cos^2(\varphi/2))`, derived in
   ``docs/03-photonics.md`` and compared term by term here;
 * the **two-photon** coincidence probability has the closed form
-  :math:`(T - R)^2`, which is an exact zero at 50:50 -- the Hong-Ou-Mandel dip.
+  :math:`(T - R)^2`, which is an exact zero at 50:50: the Hong-Ou-Mandel dip.
   An exact zero is a much sharper test of the phase convention than a small
   number would be.
 """
@@ -205,7 +205,7 @@ class TestTwoPhotonInterference:
         out = ph.two_photon_output(ph.beam_splitter())
         assert out.p_11 < 1e-30, (
             f"P(1,1) = {out.p_11:.3e}; the HOM dip is an exact algebraic zero, "
-            "not a small number -- a non-zero value means the pi/2 reflection "
+            "not a small number: a non-zero value means the pi/2 reflection "
             "phase is wrong"
         )
         assert out.p_20 == pytest.approx(0.5, abs=1e-14)

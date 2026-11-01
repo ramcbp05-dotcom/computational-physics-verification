@@ -461,7 +461,7 @@ def render(data: dict) -> str:
     w("")
     w(f"Hong-Ou-Mandel coincidence probability at 50:50: "
       f"**P(1,1) = {fmt(p['hom_coincidence'])}**. This is an algebraic zero, not a "
-      f"small number -- the permanent of the balanced splitter is "
+      f"small number: the permanent of the balanced splitter is "
       f"`(1*1 + i*i)/2 = 0` exactly. A non-zero value here would mean the `pi/2` "
       f"reflection phase is wrong, so it is a sharper test of the convention than "
       f"any intensity measurement.")
@@ -505,7 +505,7 @@ def render(data: dict) -> str:
     w("")
     w("Measured about the guiding centre, so the result is independent of the sign "
       "of the charge. The last column is the peak-to-peak variation of the radius "
-      "as a fraction of `r_c` -- zero means the orbit is a circle:")
+      "as a fraction of `r_c`: zero means the orbit is a circle:")
     w("")
     w("| q | B | m | r_c exact | r_c measured | rel error | circularity |")
     w("|---|---|---|---|---|---|---|")
@@ -545,7 +545,7 @@ def render(data: dict) -> str:
           f"{fmt(row['rk4_angular'])} |")
     w("")
     w("This table is the reason both integrators are kept. **Leapfrog's energy "
-      "error is flat** -- a symplectic map has no secular energy drift, only a "
+      "error is flat**: a symplectic map has no secular energy drift, only a "
       "bounded oscillation of size `O(dt^2)`. **RK4's grows** with the number of "
       "steps, even though it is several orders of magnitude smaller to begin with. "
       "Angular momentum shows the same split: leapfrog holds it at round-off "
@@ -577,7 +577,7 @@ def render(data: dict) -> str:
         w("|---|---|---|")
         prev = None
         for step, err in zip(row["steps"], row["errors"]):
-            ratio = "—" if prev is None else f"{prev / err:.2f}"
+            ratio = "n/a" if prev is None else f"{prev / err:.2f}"
             w(f"| {step:.3e} | {err:.3e} | {ratio} |")
             prev = err
         w("")
@@ -603,8 +603,8 @@ def render(data: dict) -> str:
     w("The spread is the report's main point. Identities that hold exactly are "
       "verified at round-off and anything larger is a bug; quantities that involve "
       "a discretisation carry an error that must shrink at the promised rate. "
-      "Mixing the two up -- quoting a `1e-3` tolerance for an exact identity, or "
-      "demanding `1e-15` from a finite difference -- is how a verification suite "
+      "Mixing the two up: quoting a `1e-3` tolerance for an exact identity, or "
+      "demanding `1e-15` from a finite difference: is how a verification suite "
       "stops meaning anything.")
     w("")
     return "\n".join(out)

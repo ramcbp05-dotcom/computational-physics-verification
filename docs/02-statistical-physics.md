@@ -24,7 +24,7 @@ U = −∂(ln Z)/∂β,     C = ∂U/∂T = β² ∂²(ln Z)/∂β²  = β² Var
 ```
 
 so `C = β² Var(E)` and `C = dU/dT` are the same quantity by two derivations.
-The module computes both, and their agreement is a real check — see below.
+The module computes both, and their agreement is a real check: see below.
 
 ### The Ising ring
 
@@ -43,8 +43,8 @@ and any field. The module refuses above `N = 22`.
 
 ### Method B: transfer matrix
 
-Write `Z` as a trace of a product of 2×2 matrices. With the symmetric
-splitting of the field between neighbouring sites,
+Write `Z` as a trace of a product of 2×2 matrices. With the symmetric splitting
+of the field between neighbouring sites,
 
 ```
 T_{s s'} = exp[ βJ s s' + ½ βh (s + s') ]
@@ -64,14 +64,14 @@ The cost is independent of `N`, so this route reaches sizes enumeration cannot.
 ## The N = 2 convention, and why it matters
 
 The two methods disagreed by up to 90 % at `N = 2` in the first version of this
-module — and only at `N = 2`.
+module: and only at `N = 2`.
 
 The cause is not a bug in either formula. `tr T^N` counts exactly `N` bonds, so
 at `N = 2` sites 0 and 1 are bonded **twice**. The enumeration had been written
 to skip the wrap bond at `N = 2` on the grounds that it joins the same pair,
 giving a one-bond model. Both are defensible models; they are not the same
-model, and the ground-state energy differs by a factor of two
-(`E₀ = −2J` against `−J`).
+model, and the ground-state energy differs by a factor of two (`E₀ = −2J`
+against `−J`).
 
 The library now uses the `N`-bond ring convention everywhere, which is what
 makes the two methods agree at every size. `quantum_spin.heisenberg_chain`
@@ -97,20 +97,20 @@ Two further points:
 
 * **The heat capacity takes the variance about the mean.** At low temperature
   `⟨E²⟩` and `⟨E⟩²` agree to many digits, and `⟨E²⟩ − ⟨E⟩²` loses that
-  precision to cancellation — the same failure as the one-pass variance
-  formula. `⟨(E − U)²⟩` keeps every term on the scale of the fluctuation.
-* **`λ₊^N` overflows for long chains.** `ln Z` is computed as
-  `N ln λ₊ + ln1p[(λ₋/λ₊)^N]`. The ratio is bounded by 1 by construction, so
-  its `N`-th power underflows harmlessly to zero, and the sign is carried
-  explicitly for antiferromagnetic `J` where `λ₋ < 0`. At `N = 1000, β = 2`
-  this is finite where the direct form is not.
+  precision to cancellation: the same failure as the one-pass variance formula.
+  `⟨(E − U)²⟩` keeps every term on the scale of the fluctuation.
+* **`λ₊^N` overflows for long chains.** `ln Z` is computed as `N ln λ₊ +
+  ln1p[(λ₋/λ₊)^N]`. The ratio is bounded by 1 by construction, so its `N`-th
+  power underflows harmlessly to zero, and the sign is carried explicitly for
+  antiferromagnetic `J` where `λ₋ < 0`. At `N = 1000, β = 2` this is finite
+  where the direct form is not.
 
 ## Verification results
 
 ### Two independent methods
 
-Over **384 parameter combinations** — `N ∈ {2,…,12}`, `h ∈ {0, 0.25, 1.0,
-−0.6}`, `J ∈ {1, −1, 0.4}`, `β ∈ {0.05, 0.4, 1.5, 6.0}` — the worst relative
+Over **384 parameter combinations** (`N ∈ {2,…,12}`, `h ∈ {0, 0.25, 1.0,
+−0.6}`, `J ∈ {1, −1, 0.4}`, `β ∈ {0.05, 0.4, 1.5, 6.0}`) the worst relative
 disagreement in `ln Z` is **2.4e-13**.
 
 ### Limiting cases
@@ -125,11 +125,11 @@ disagreement in `ln Z` is **2.4e-13**.
 | `J = 0`: `m = tanh(βh)` | exact | rel. error ≤ 1.4e-16 |
 | `J = 0`: `Z = [2cosh(βh)]^N` | exact | rel. error ≤ 1e-12 |
 
-The low-temperature entropy tending to `ln 2` rather than zero is worth
-pausing on: at zero field the ferromagnetic ground state is two-fold degenerate
-(all up, all down), and the residual entropy is `ln g₀`. Switching on a field
-makes the ground state unique and the entropy goes to zero instead. A suite
-that only checked `S → 0` would have been wrong half the time.
+The low-temperature entropy tending to `ln 2` rather than zero is worth pausing
+on: at zero field the ferromagnetic ground state is two-fold degenerate (all
+up, all down), and the residual entropy is `ln g₀`. Switching on a field makes
+the ground state unique and the entropy goes to zero instead. A suite that only
+checked `S → 0` would have been wrong half the time.
 
 ### Thermodynamic consistency
 
@@ -142,12 +142,13 @@ that only checked `S → 0` would have been wrong half the time.
 | 3.0 | 0.002073781 | 0.002073785 | 1.9e-06 |
 
 The residual is the truncation error of the finite difference, and it grows as
-`C` itself becomes small — a relative measure against a vanishing quantity.
-It is not a disagreement between the two identities.
+`C` itself becomes small: a relative measure against a vanishing quantity. It
+is not a disagreement between the two identities.
 
 ## Figures
 
-![partition function, limits, heat capacity](../figures/02-statistical-physics.png)
+![partition function, limits, heat
+capacity](../figures/02-statistical-physics.png)
 
 *Left:* `ln Z` from enumeration and from the transfer matrix, indistinguishable
 at this scale. *Centre:* `U` and `S` against temperature with `E₀`, `N ln 2`

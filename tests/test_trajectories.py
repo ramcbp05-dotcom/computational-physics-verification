@@ -3,14 +3,14 @@ r"""Verification of the trajectory module.
 An integrator that produces a plausible-looking orbit is not evidence of
 anything. What is checked here:
 
-* **closed forms** -- gyrofrequency, gyroradius, E x B drift speed, Kepler's
+* **closed forms** (gyrofrequency, gyroradius, E x B drift speed, Kepler's
   third law, the vis-viva relation;
-* **conserved quantities** -- :math:`|\mathbf v|` under a pure magnetic field,
+* **conserved quantities**) :math:`|\mathbf v|` under a pure magnetic field,
   specific energy and angular momentum under gravity;
-* **convergence order** -- leapfrog must measure 2 and RK4 must measure 4,
+* **convergence order** (leapfrog must measure 2 and RK4 must measure 4,
   because a first-order scheme mislabelled as second order is the failure mode
   that a plot cannot show;
-* **the structural difference between the schemes** -- the symplectic
+* **the structural difference between the schemes**) the symplectic
   integrator's energy error is *bounded*, and RK4's grows with run length.
   Measured below: leapfrog's drift is flat at 2.68e-05 from 5 orbits to 320,
   while RK4's grows from 1.5e-10 to 3.1e-09.
@@ -322,7 +322,7 @@ class TestTwoBodyIntegration:
 
 class TestSymplecticVsNonSymplectic:
     def test_leapfrog_energy_error_is_bounded_in_time(self):
-        r"""Measured: 2.682e-05 at 5, 20, 80 and 320 orbits -- flat to three
+        r"""Measured: 2.682e-05 at 5, 20, 80 and 320 orbits: flat to three
         significant figures. A symplectic scheme's energy error oscillates
         rather than accumulating."""
         x0, v0 = tr.periapsis_state(1.0, 0.5, MU)

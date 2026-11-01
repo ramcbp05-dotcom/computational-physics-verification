@@ -29,7 +29,7 @@ position drift, a half electric kick, a *rotation* of the velocity by the
 magnetic field, a second half kick, and the second half drift. The rotation is
 applied as an exact finite rotation rather than as a derivative, so for
 :math:`\mathbf E = 0` the scheme conserves :math:`|\mathbf v|` to round-off at
-**any** step size -- 7e-15 at four steps per orbit, where RK4 loses 55 % of the
+**any** step size: 7e-15 at four steps per orbit, where RK4 loses 55 % of the
 speed. The symmetric placement of the two half drifts matters as much as the
 rotation does; see :func:`_boris_step` for the measurement.
 
@@ -161,7 +161,7 @@ def guiding_centre(position, velocity, b_field, charge: float = 1.0,
     + m\,(\mathbf v \times \mathbf B)/(q B^2)`.
 
     The particle does not orbit the origin, and it does not orbit its own
-    starting point either -- the centre sits one gyroradius away, on the side
+    starting point either. The centre sits one gyroradius away, on the side
     the Lorentz force points, which flips with the sign of the charge. Starting
     a test particle at ``[r_c, 0, 0]`` with velocity along ``+y`` puts the
     centre at ``[2 r_c, 0, 0]`` for a positive charge and at the origin for a
@@ -207,7 +207,7 @@ def _boris_step(x, v, e, b, charge, mass, dt):
     ===============================  ====================  ==================
 
     Both are second order in the trajectory as a whole, so a convergence study
-    of the final position cannot tell them apart -- only the conserved
+    of the final position cannot tell them apart: only the conserved
     quantities can. With the symmetric arrangement the gyro-orbit comes out as
     an exact circle of radius ``r_c`` to round-off.
     """

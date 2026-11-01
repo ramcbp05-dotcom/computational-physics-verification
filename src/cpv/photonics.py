@@ -4,7 +4,7 @@ Conventions
 -----------
 A two-mode state is a complex amplitude vector :math:`(a_1, a_2)`, and every
 component is a 2x2 unitary acting on it. Intensity is :math:`|a_i|^2`, so a
-lossless component conserves :math:`\sum_i |a_i|^2` exactly -- that is the same
+lossless component conserves :math:`\sum_i |a_i|^2` exactly. That is the same
 statement as :math:`U^\dagger U = \mathbb{1}`, which is why unitarity is the
 first thing checked for every matrix this module produces.
 
@@ -109,7 +109,7 @@ def mach_zehnder(phi: float, *, theta_in: float = math.pi / 4,
     r"""Mach-Zehnder interferometer: splitter, phase in one arm, splitter.
 
     With both splitters balanced and the input in mode 0, the output
-    intensities are :math:`(\sin^2(\varphi/2), \cos^2(\varphi/2))` -- derived
+    intensities are :math:`(\sin^2(\varphi/2), \cos^2(\varphi/2))`: derived
     in ``docs/03-photonics.md`` and checked against this matrix in the tests.
     """
     return cascade(beam_splitter(theta_in), phase_shifter(phi, mode=arm),
@@ -185,7 +185,7 @@ class TwoPhotonOutput:
 
     @property
     def coincidence(self) -> float:
-        """Probability of one photon in each output -- the HOM observable."""
+        """Probability of one photon in each output: the HOM observable."""
         return self.p_11
 
     def as_dict(self) -> dict:

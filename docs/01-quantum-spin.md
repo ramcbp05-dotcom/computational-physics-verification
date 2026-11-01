@@ -93,8 +93,8 @@ E = J/4 − h·m,    m ∈ {−1, 0, +1}
 ```
 
 Measured error over `J ∈ {1, 2.5, −1}` and `h ∈ {0, 0.6, 2.4}`: at most
-`1.1e-16`. The singlet is confirmed to be `(|ud⟩ − |du⟩)/√2` with
-`⟨S²⟩ = 0`, and each triplet state to have `⟨S²⟩ = 2`.
+`1.1e-16`. The singlet is confirmed to be `(|ud⟩ − |du⟩)/√2` with `⟨S²⟩ = 0`,
+and each triplet state to have `⟨S²⟩ = 2`.
 
 **Traceless at zero field.** `tr(Sᵃ_i Sᵃ_j) = 0` for `i ≠ j`, so a zero-field
 chain has `tr H = 0` exactly, at every size. This catches an embedding error
@@ -110,8 +110,8 @@ The isotropic model commutes with the total spin:
 
 An early version of this document asserted that a uniform field along `z`
 breaks the first of these. **It does not.** `S²` commutes with every component
-of the total spin, including `Sᶻ_tot`, so the Zeeman term commutes with `S²`
-as well. The measured commutator with `h = 0.7` is `4.4e-16` — zero.
+of the total spin, including `Sᶻ_tot`, so the Zeeman term commutes with `S²` as
+well. The measured commutator with `h = 0.7` is `4.4e-16`: zero.
 
 What the field does is lift the degeneracy *inside* a multiplet. The spectrum
 changes; the symmetry label does not. `S²` remains a good quantum number, which
@@ -120,9 +120,9 @@ meaningful.
 
 Two things genuinely do break it, and both are tested:
 
-* **anisotropic exchange** — XXZ with `Δz ≠ 1`, Ising, XY. Measured
-  `|[H, S²]|` of 0.5 to 1.0, while `[H, Sᶻ_tot] = 0` survives;
-* **a site-dependent field** — a staggered `(−1)^i h Sᶻ_i` term. The Zeeman
+* **anisotropic exchange**: XXZ with `Δz ≠ 1`, Ising, XY. Measured `|[H, S²]|`
+  of 0.5 to 1.0, while `[H, Sᶻ_tot] = 0` survives;
+* **a site-dependent field**: a staggered `(−1)^i h Sᶻ_i` term. The Zeeman
   operator is then no longer proportional to `Sᶻ_tot`.
 
 The distinction matters for block-diagonalisation: a code that assumes `S²`
@@ -137,7 +137,7 @@ XXZ anisotropy is wrong.
 
 Applied through the eigenbasis, not by a series expansion or a time-stepping
 scheme. This is exact to round-off at every `t` and has **no step-size error at
-all** — a point worth making explicitly, because it is the reason this module
+all**: a point worth making explicitly, because it is the reason this module
 has no convergence study.
 
 Verified against the closed-form precession of a spin initially along `+x` in a
@@ -181,5 +181,5 @@ symmetry requires, and the probabilities sum to 1 to twelve decimal places.
 
 * Exact diagonalisation only. Memory is `O(4^n)` for spin-1/2, so `n ≈ 14` is
   the practical ceiling; nothing here is a substitute for DMRG or QMC.
-* Uniform couplings only — no disorder, no long-range interaction.
+* Uniform couplings only: no disorder, no long-range interaction.
 * Zero temperature dynamics; no open-system evolution.

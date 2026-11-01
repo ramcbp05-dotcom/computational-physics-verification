@@ -121,7 +121,7 @@ class TestManyBodyConstruction:
 
         This is easy to get backwards. A field along :math:`z` certainly
         singles out an axis, and it does lift the degeneracy inside a
-        multiplet -- but :math:`S^2` commutes with *every* component of the
+        multiplet, but :math:`S^2` commutes with *every* component of the
         total spin, so :math:`[S^2, \sum_i S^z_i] = 0` and the field commutes
         with :math:`S^2` too. :math:`S^2` therefore remains a good quantum
         number; what the field removes is the degeneracy, not the symmetry
