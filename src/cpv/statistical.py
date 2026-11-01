@@ -277,17 +277,25 @@ def ising_log_z_transfer(n_sites: int, beta: float, *, coupling: float = 1.0,
 
     .. math:: Z = \lambda_+^N + \lambda_-^N
 
-    Computed as :math:`N \ln \lambda_+ + \ln[1 + (\lambda_-/\lambda_+)^N]`
-    rather than by forming the powers: at ``N = 200`` and low temperature
-    :math:`\lambda_+^N` overflows a double, while the ratio
-    :math:`\lambda_-/\lambda_+` is bounded by 1 and its ``N``-th power
-    underflows harmlessly to zero. ``lambda_-`` may be negative for
-    ``h = 0``, so the sign is carried explicitly.
+    Evaluated by binary exponentiation of the positive transfer matrix in the
+    log domain. This avoids both overflow and cancellation between opposite-sign
+    eigenvalues of antiferromagnetic odd rings at low temperature.
     """
     if n_sites < 2:
         raise ValueError(f"the transfer matrix needs at least 2 sites, got {n_sites}")
-    lam_plus, lam_minus = ising_transfer_eigenvalues(beta, coupling=coupling, field=field)
+    beta = _check_beta(beta)
+    transfer = beta * np.array([[coupling + field, -coupling],
+                                [-coupling, coupling - field]], dtype=float)
+    product = np.array([[0.0, -np.inf], [-np.inf, 0.0]])
 
-    ratio = lam_minus / lam_plus              # |ratio| <= 1 by construction
-    correction = math.copysign(abs(ratio) ** n_sites, 1.0 if lam_minus >= 0 or n_sites % 2 == 0 else -1.0)
-    return n_sites * math.log(lam_plus) + math.log1p(correction)
+    def multiply(left, right):
+        return np.logaddexp.reduce(left[:, :, None] + right[None, :, :], axis=1)
+
+    power = n_sites
+    while power:
+        if power % 2:
+            product = multiply(product, transfer)
+        power //= 2
+        if power:
+            transfer = multiply(transfer, transfer)
+    return float(np.logaddexp(product[0, 0], product[1, 1]))

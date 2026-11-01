@@ -283,7 +283,7 @@ def evolve(hamiltonian, state, times) -> np.ndarray:
     coefficients = vectors.conj().T @ psi            # amplitudes in the eigenbasis
     t_arr = np.atleast_1d(np.asarray(times, dtype=float))
     phases = np.exp(-1.0j * np.outer(t_arr, values))  # (n_times, dim)
-    return (phases * coefficients[None, :]) @ vectors.conj().T
+    return (phases * coefficients[None, :]) @ vectors.T
 
 
 def thermal_density_matrix(hamiltonian, beta: float) -> np.ndarray:

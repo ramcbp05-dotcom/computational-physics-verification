@@ -10,8 +10,8 @@ checked against closed forms, and a numerical error report regenerated on every
 CI run.
 
 ```
-4 modules · 739 tests · 7 figures
-worst disagreement between two independent methods:  2.4e-13
+4 modules · 796 tests · 7 figures
+transfer-matrix / enumeration agreement:             4.2e-16
 tightest algebraic identity (Hong-Ou-Mandel zero):   4.9e-32
 ```
 
@@ -46,7 +46,7 @@ and Rabi precession against `½cos(ht)` to `3.9e-16`.
 Partition functions and thermodynamic observables for small Ising rings, by
 brute-force enumeration of all `2^N` states **and** by transfer matrix.
 
-Verified by: the two methods agreeing to `2.4e-13` across 384 parameter
+Verified by: the two methods agreeing to `4.2e-16` across 384 parameter
 combinations; `S → N ln 2` and `S → ln 2` in the two temperature limits; `m =
 tanh(βh)` at zero coupling to `1.4e-16`; and the fluctuation formula `C =
 β²Var(E)` against `C = dU/dT`.
@@ -178,7 +178,7 @@ src/cpv/
   photonics.py        beam splitters, interferometers, two-photon output
   trajectories.py     Boris push, velocity Verlet, RK4, orbital elements
   verification.py     error metrics, convergence fitting, algebraic checks
-tests/                739 tests, one file per module
+tests/                796 tests, module tests and scientific regression cases
 docs/                 derivations, limiting cases and limitations per module
 scripts/
   error_report.py     regenerates results/numerical-error-report.md

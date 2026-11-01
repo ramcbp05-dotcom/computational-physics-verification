@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31 21:06 UTC",
+  "generated_at": "2026-11-01 07:55 UTC",
   "numpy_version": "2.5.4",
   "quantum": {
     "operators": [
@@ -118,7 +118,7 @@
     "norm": 2.220446049250313e-16
   },
   "statistical": {
-    "worst_agreement": 2.4137517035269875e-13,
+    "worst_agreement": 4.2294210459815434e-16,
     "n_points": 384,
     "agreement": [
       {
@@ -137,7 +137,7 @@
         "n_sites": 4,
         "beta": 1.5,
         "log_z": 7.556125764626954,
-        "error": 1.175441552148351e-16
+        "error": 0.0
       },
       {
         "n_sites": 4,
@@ -179,7 +179,7 @@
         "n_sites": 12,
         "beta": 0.4,
         "log_z": 9.385239683608509,
-        "error": 1.8927133448735356e-16
+        "error": 0.0
       },
       {
         "n_sites": 12,
@@ -191,7 +191,7 @@
         "n_sites": 12,
         "beta": 6.0,
         "log_z": 90.00000000002373,
-        "error": 0.0
+        "error": 1.5789838572442508e-16
       }
     ],
     "limits": [

@@ -59,7 +59,10 @@ so that `Z = tr T^N = λ₊^N + λ₋^N` with
 λ± = e^{βJ} cosh(βh) ± √( e^{2βJ} sinh²(βh) + e^{−2βJ} )
 ```
 
-The cost is independent of `N`, so this route reaches sizes enumeration cannot.
+The closed form explains the spectrum. The implementation computes `ln tr(T^N)`
+by binary matrix exponentiation in the log domain, in `O(log N)` steps.
+This avoids cancellation between opposite-sign eigenvalues on odd
+antiferromagnetic rings and overflow at low temperature.
 
 ## The N = 2 convention, and why it matters
 
@@ -111,7 +114,7 @@ Two further points:
 
 Over **384 parameter combinations** (`N ∈ {2,…,12}`, `h ∈ {0, 0.25, 1.0,
 −0.6}`, `J ∈ {1, −1, 0.4}`, `β ∈ {0.05, 0.4, 1.5, 6.0}`) the worst relative
-disagreement in `ln Z` is **2.4e-13**.
+disagreement in `ln Z` is **4.2e-16**.
 
 ### Limiting cases
 
